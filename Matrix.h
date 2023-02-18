@@ -5,9 +5,44 @@ private:
 	int columns;
 	float** matrix;
 public:
+	void Addition(Matrix matrix)
+	{
+		for (int b = 0; b < rows; b++)
+		{
+			for (int i = 0; i < columns; i++)
+			{
+				this->matrix[b][i] += matrix.GetMatrix()[b][i];
+			}
+		}
+	}
+	static Matrix Addition(Matrix matrix, Matrix matrixSecond)
+	{
+		float** matrixNew = Matrix::GetZeroMatrix(matrix.GetRows(), matrix.GetColumns());
+		for (int b = 0; b < matrix.GetRows(); b++)
+		{
+			for (int i = 0; i < matrix.GetColumns(); i++)
+			{
+				matrixNew[b][i] = matrix.GetMatrix()[b][i] + matrixSecond.GetMatrix()[b][i];
+			}
+		}
+		return Matrix(matrix.GetRows(), matrix.GetColumns(), matrixNew);
+	}
+	static float** GetZeroMatrix(int rows, int columns)
+	{
+		float** matrix = new float* [rows];
+		for (int b = 0; b < rows; b++)
+		{
+			matrix[b] = new float[rows];
+			for (int i = 0; i < columns; i++)
+			{
+				matrix[b][i] = { 0 };
+			}
+		}
+		return matrix;
+	}
 	float** GetMatrix() 
 	{
-		return matrix;
+		return this->matrix;
 	}
 	void SetMatrix(float** matrix) 
 	{
@@ -34,6 +69,20 @@ public:
 				matrix[b][i] = {0};
 			}
 		}
+	}
+	Matrix(int rows, int columns, float** matrix)
+	{
+		this->rows = rows;
+		this->columns = columns;
+		this->matrix = matrix;
+	}
+	int GetRows() 
+	{
+		return rows;
+	}
+	int GetColumns()
+	{
+		return columns;
 	}
 	~Matrix()
 	{
