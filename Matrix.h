@@ -1,10 +1,23 @@
 #pragma once
+#include <iostream>
+
 class Matrix {
 private:
 	int rows;
 	int columns;
 	float** matrix;
 public:
+	void Print()
+	{
+		for (int b = 0; b < rows; b++)
+		{
+			std::cout << "" << std::endl;
+			for (int i = 0; i < columns; i++)
+			{
+				std::cout << this->matrix[b][i] << " ";
+			}
+		}
+	}
 	void MultiplyByNumber(int number)
 	{
 		for (int b = 0; b < rows; b++)
