@@ -3,7 +3,7 @@ class Matrix {
 private:
 	int rows;
 	int columns;
-	float** matrix; // придётся делать массив указателей на массив указателей типа float :( dq
+	float** matrix;
 public:
 	float** GetMatrix() 
 	{
