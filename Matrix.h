@@ -5,6 +5,28 @@ private:
 	int columns;
 	float** matrix;
 public:
+	void MultiplyByNumber(int number)
+	{
+		for (int b = 0; b < rows; b++)
+		{
+			for (int i = 0; i < columns; i++)
+			{
+				this->matrix[b][i] = this->matrix[b][i] * number;
+			}
+		}
+	}
+	static Matrix MultiplyByNumber(int number, Matrix matrix)
+	{
+		float** matrixNew = Matrix::GetZeroMatrix(matrix.GetRows(), matrix.GetColumns());
+		for (int b = 0; b < matrix.GetRows(); b++)
+		{
+			for (int i = 0; i < matrix.GetColumns(); i++)
+			{
+				matrixNew[b][i] = matrix.GetMatrix()[b][i] * number;
+			}
+		}
+		return Matrix(matrix.GetRows(), matrix.GetColumns(), matrixNew);
+	}
 	void Addition(Matrix matrix)
 	{
 		for (int b = 0; b < rows; b++)
