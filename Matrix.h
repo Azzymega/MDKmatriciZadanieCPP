@@ -5,6 +5,22 @@ private:
 	int columns;
 	float** matrix; // придётся делать массив указателей на массив указателей типа float :( dq
 public:
+	float** GetMatrix() 
+	{
+		return matrix;
+	}
+	void SetMatrix(float** matrix) 
+	{
+		this->matrix = matrix;
+	}
+	float GetMatrixNumber(int row, int column)
+	{
+		return this->matrix[row - 1][column - 1];
+	}
+	void SetMatrixNumber(float number, int row, int column)
+	{
+		this->matrix[row-1][column-1] = number;
+	}
 	Matrix(int rows, int columns) 
 	{
 		this->rows = rows;
@@ -15,7 +31,7 @@ public:
 			matrix[b] = new float[rows];
 			for (int i = 0; i < columns; i++)
 			{
-				matrix[i][b] = {0};
+				matrix[b][i] = {0};
 			}
 		}
 	}
