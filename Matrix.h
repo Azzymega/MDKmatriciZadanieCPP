@@ -7,7 +7,7 @@ private:
 	int columns;
 	float** matrix;
 public:
-	 void Multiplication(Matrix matrix) {
+	void Multiplication(Matrix matrix) {
 		float** matrixNew = Matrix::GetZeroMatrix(this->GetRows(), this->GetColumns());
 		for (int x = 0; x < this->GetColumns(); x++) {
 			for (int y = 0; y < matrix.GetColumns(); y++) {
@@ -18,25 +18,25 @@ public:
 		}
 		this->SetMatrix(matrixNew);
 	}
-	static Matrix Multiplication(Matrix matrix, Matrix matrixSecond) {
-		 float** matrixNew = Matrix::GetZeroMatrix(matrix.GetRows(), matrix.GetColumns());
-		 for (int x = 0; x < matrix.GetColumns(); x++) {
-			 for (int y = 0; y < matrixSecond.GetColumns(); y++) {
-				 for (int z = 0; z < matrixSecond.GetRows(); z++) {
-					 matrixNew[x][y] += matrixSecond.GetMatrix()[x][z] * matrix.GetMatrix()[z][y];
+	static Matrix Multiplication(Matrix *matrix, Matrix *matrixSecond) {
+		 float** matrixNew = Matrix::GetZeroMatrix(matrixSecond->GetRows(), matrixSecond->GetColumns());
+		 for (int x = 0; x < matrixSecond->GetColumns(); x++) {
+			 for (int y = 0; y < matrix->GetColumns(); y++) {
+				 for (int z = 0; z < matrix->GetRows(); z++) {
+					 matrixNew[x][y] += matrix->GetMatrix()[x][z] * matrixSecond->GetMatrix()[z][y];
 				 }
 			 }
 		 }
-		 return Matrix(matrix.GetRows(), matrix.GetColumns(), matrixNew);
+		 return Matrix(matrix->GetRows(), matrix->GetColumns(), matrixNew);
 	 }
 	void Print()
 	{
-		for (int b = 0; b < rows; b++)
+		for (int b = 0; b < this->GetRows(); b++)
 		{
 			std::cout << "" << std::endl;
-			for (int i = 0; i < columns; i++)
+			for (int i = 0; i < this->GetColumns(); i++)
 			{
-				std::cout << this->matrix[b][i] << " ";
+				std::cout << this->GetMatrix()[b][i] << " ";
 			}
 		}
 	}
@@ -50,17 +50,17 @@ public:
 			}
 		}
 	}
-	static Matrix MultiplyByNumber(int number, Matrix matrix)
+	static Matrix MultiplyByNumber(int number, Matrix* matrix)
 	{
-		float** matrixNew = Matrix::GetZeroMatrix(matrix.GetRows(), matrix.GetColumns());
-		for (int b = 0; b < matrix.GetRows(); b++)
+		float** matrixNew = Matrix::GetZeroMatrix(matrix->GetRows(), matrix->GetColumns());
+		for (int b = 0; b < matrix->GetRows(); b++)
 		{
-			for (int i = 0; i < matrix.GetColumns(); i++)
+			for (int i = 0; i < matrix->GetColumns(); i++)
 			{
-				matrixNew[b][i] = matrix.GetMatrix()[b][i] * number;
+				matrixNew[b][i] = matrix->GetMatrix()[b][i] * number;
 			}
 		}
-		return Matrix(matrix.GetRows(), matrix.GetColumns(), matrixNew);
+		return Matrix(matrix->GetRows(), matrix->GetColumns(), matrixNew);
 	}
 	void Addition(Matrix matrix)
 	{
@@ -72,17 +72,17 @@ public:
 			}
 		}
 	}
-	static Matrix Addition(Matrix matrix, Matrix matrixSecond)
+	static Matrix Addition(Matrix* matrix, Matrix* matrixSecond)
 	{
-		float** matrixNew = Matrix::GetZeroMatrix(matrix.GetRows(), matrix.GetColumns());
-		for (int b = 0; b < matrix.GetRows(); b++)
+		float** matrixNew = Matrix::GetZeroMatrix(matrix->GetRows(), matrix->GetColumns());
+		for (int b = 0; b < matrix->GetRows(); b++)
 		{
-			for (int i = 0; i < matrix.GetColumns(); i++)
+			for (int i = 0; i < matrix->GetColumns(); i++)
 			{
-				matrixNew[b][i] = matrix.GetMatrix()[b][i] + matrixSecond.GetMatrix()[b][i];
+				matrixNew[b][i] = matrix->GetMatrix()[b][i] + matrixSecond->GetMatrix()[b][i];
 			}
 		}
-		return Matrix(matrix.GetRows(), matrix.GetColumns(), matrixNew);
+		return Matrix(matrix->GetRows(), matrix->GetColumns(), matrixNew);
 	}
 	static float** GetZeroMatrix(int rows, int columns)
 	{
