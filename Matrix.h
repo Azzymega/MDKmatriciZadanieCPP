@@ -7,6 +7,28 @@ private:
 	int columns;
 	float** matrix;
 public:
+	 void Multiplication(Matrix matrix) {
+		float** matrixNew = Matrix::GetZeroMatrix(this->GetRows(), this->GetColumns());
+		for (int x = 0; x < this->GetColumns(); x++) {
+			for (int y = 0; y < matrix.GetColumns(); y++) {
+				for (int z = 0; z < matrix.GetRows(); z++) {
+					matrixNew[x][y] += matrix.GetMatrix()[x][z] * this->GetMatrix()[z][y];
+				}
+			}
+		}
+		this->SetMatrix(matrixNew);
+	}
+	static Matrix Multiplication(Matrix matrix, Matrix matrixSecond) {
+		 float** matrixNew = Matrix::GetZeroMatrix(matrix.GetRows(), matrix.GetColumns());
+		 for (int x = 0; x < matrix.GetColumns(); x++) {
+			 for (int y = 0; y < matrixSecond.GetColumns(); y++) {
+				 for (int z = 0; z < matrixSecond.GetRows(); z++) {
+					 matrixNew[x][y] += matrixSecond.GetMatrix()[x][z] * matrix.GetMatrix()[z][y];
+				 }
+			 }
+		 }
+		 return Matrix(matrix.GetRows(), matrix.GetColumns(), matrixNew);
+	 }
 	void Print()
 	{
 		for (int b = 0; b < rows; b++)
