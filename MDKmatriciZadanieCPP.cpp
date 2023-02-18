@@ -15,6 +15,7 @@ int main()
     matrixSecond->SetMatrixNumber(7, 1, 2);
     matrixSecond->SetMatrixNumber(9, 2, 1);
     matrixSecond->SetMatrixNumber(11, 2, 2);
-    matrix->Print();
+    Matrix matrixOther = Matrix::Multiplication(matrix,matrixSecond);
+    matrixOther.Print();
 }
 
